@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS images;
+
+CREATE TABLE images(
+    id SERIAL PRIMARY KEY,
+    title VARCHAR NOT NULL,
+    description TEXT,
+    url VARCHAR NOT NULL,
+    category VARCHAR NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
