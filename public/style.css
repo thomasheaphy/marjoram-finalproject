@@ -15,6 +15,10 @@ header {
     margin-right: 60px;
 }
 
+main {
+    opacity: 1;
+}
+
 #logo img {
     height: 120px;
 }
@@ -35,14 +39,43 @@ header {
     text-decoration: none;
 }
 
-#top-menu a:hover {
+#top-menu a:hover,
+.menu-item:hover {
     color: grey;
     transition: color 0.5s;
+}
+
+.menu-item {
+    cursor: default;
 }
 
 #top-menu img:hover {
     opacity: 60%;
     transition: opacity 0.5s;
+}
+
+.dropdown-menu {
+    transition: all 1s ease-in-out;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+    width: auto;
+}
+
+.dropdown-menu.closed .menu {
+    height: 0px;
+    visibility: hidden;
+    background: black;
+}
+
+.menu {
+    list-style-type: none;
+    position: absolute;
+    z-index: 2;
+    /* background-color: rgb(46, 46, 46); */
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .splash-image {
@@ -108,8 +141,76 @@ footer {
 
 #admin-login {
     position: absolute;
+    border: 1px white solid;
     bottom: 10px;
     width: 30px;
     height: 30px;
     background: black;
+}
+
+#login-box {
+    visibility: hidden;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    padding: 20px;
+    text-align: left;
+    line-height: 20px;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    background-color: rgb(27, 27, 27);
+    width: 300px;
+    height: 150px;
+    border: 2px white solid;
+    border-radius: 4%;
+}
+
+@keyframes fadeInOpacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.fadeOut {
+    opacity: 0;
+    animation-name: fadeOutOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 0.5s;
+}
+
+@keyframes fadeOutOpacity {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.fadeOut2 {
+    opacity: 1;
+    background: black;
+    animation-name: fadeOutOpacity2;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1s;
+}
+
+@keyframes fadeOutOpacity2 {
+    0% {
+        opacity: 1;
+        background: black;
+    }
+    50% {
+        opacity: 0;
+        background: rgb(255, 202, 239);
+    }
+    100% {
+        opacity: 1;
+        background: black;
+    }
 }

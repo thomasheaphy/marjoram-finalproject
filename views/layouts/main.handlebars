@@ -1,39 +1,79 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css2?family=Yantramanav&display=swap" rel="stylesheet"> 
-    <title>Thomas Heaphy</title>
-</head>
-<body>
-    <header>
-        <div id="logo">
-            <img src="/logo.jpg">
-        </div>
-        <div id="top-menu">
-            <div><a href="portfolio">PORTFOLIO</a></div>
-            <div><a href="about">ABOUT</a></div>
-            <div><a href="contact">CONTACT</a></div>
-            <div><a href="http://www.instagram.com/spreadloveandterror" target="_blank">
-                <img src="instaicon.png"></a>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/style.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Yantramanav&display=swap"
+            rel="stylesheet"
+        />
+        <title>Thomas Heaphy</title>
+    </head>
+    <body>
+        <header>
+            <div id="logo">
+                <img src="/logo.jpg" />
             </div>
+            <div id="top-menu">
+                <div class="dropdown-menu closed">
+                    <div id="portfolio-label" class="menu-item">PORTFOLIO</div>
+                    <ul class="menu">
+                        <li><a href="#">LINK ONE</a></li>
+                        <li><a href="#">LINK TWO</a></li>
+                        <li><a href="#">LINK THREE</a></li>
+                        <li><a href="#">ABCDEFGHIJKLM</a></li>
+                        <li><a href="#">LINK ONE</a></li>
+                        <li><a href="#">LINK TWO</a></li>
+                        <li><a href="#">LINK THREE</a></li>
+                        <li><a href="#">ABCDEFGHIJKLM</a></li>
+                    </ul>
+                </div>
+
+                <div id="about-label">
+                    <a href="about">ABOUT</a>
+                </div>
+                <div id="contact-label">
+                    <a href="contact">CONTACT</a>
+                </div>
+                <div><a
+                        href="http://www.instagram.com/spreadloveandterror"
+                        target="_blank"
+                    >
+                        <img src="instaicon.png" /></a>
+                </div>
+            </div>
+        </header>
+
+        {{{body}}}
+
+        <footer>
+
+            © THOMAS HEAPHY 2021
+        </footer>
+
+        <div id="admin-login"></div>
+        <div id="login-box">
+            <form
+                id="login-form"
+                method="POST"
+                action="send"
+                enctype="multipart/form-data"
+            >
+                <label>Username</label>
+                <input type="text" name="username" required />
+                <label>Password</label>
+                <input type="password" name="password" required />
+                <button type="submit">Submit</button>
+            </form>
         </div>
-    </header>
-   
-   {{{body}}}
 
-
-    <footer>
-    <a href="login.html"><div id="admin-login"></div></a>
-        © THOMAS HEAPHY 2021
-    </footer>
+        <script src="/site.js"></script>
     </body>
-    
-    
-</body>
+
 </html>

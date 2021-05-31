@@ -12,10 +12,12 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.918.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.2",
     "fs": "0.0.1-security",
     "multer": "^1.4.2",
+    "nodemailer": "^6.6.1",
     "path": "^0.12.7",
     "spiced-pg": "^1.0.4",
     "uid-safe": "^2.1.5"

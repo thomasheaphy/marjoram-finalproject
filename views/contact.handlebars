@@ -1,15 +1,18 @@
+    
+    
     <main>
+    
         
             <div id="text-container">
                 <div><p>For commissions or general enquiries, please contact via email or use the contact form below.</p>
-                    <form type="POST">
+                    <form id="contact-form" method="POST" action="send" enctype="multipart/form-data">
                         <label>Name</label>
-                        <input type="text">
+                        <input type="text" name="name" required>
                         <label>E-mail Address</label>
-                        <input type="email">
+                        <input type="email" name="email" required>
                         <label>Message</label>
-                        <textarea class="message"></textarea>
-                        <button>Submit</button>
+                        <textarea class="message" name="message" required></textarea>
+                        <button type="submit">Submit</button>
                     </form>
                 
                 </div>
