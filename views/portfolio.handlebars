@@ -1,0 +1,9 @@
+<main>
+    <div id="image-container" v-for="image in images" v-bind:key="image.id">
+        <div class="image-card">
+            <a v-bind:href="`#${image.id}`">
+                <img :src="`${image.path}`" :alt="`${image.title}`" />
+            </a>
+        </div>
+    </div>
+</main>

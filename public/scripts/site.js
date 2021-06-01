@@ -22,12 +22,9 @@
     let dropdownMenu = document.querySelector(".dropdown-menu");
 
     dropdownMenu.addEventListener("mouseover", (e) => {
-        console.log("click on menu");
         if (dropdownMenu.classList.contains("closed")) {
-            console.log("remove closed");
             dropdownMenu.classList.remove("closed");
         } else {
-            console.log("add closed");
             dropdownMenu.classList.add("closed");
         }
     });
@@ -35,10 +32,8 @@
     dropdownMenu.addEventListener("mouseout", (e) => {
         console.log("click on menu");
         if (dropdownMenu.classList.contains("closed")) {
-            console.log("remove closed");
             dropdownMenu.classList.remove("closed");
         } else {
-            console.log("add closed");
             dropdownMenu.classList.add("closed");
         }
     });
@@ -49,19 +44,21 @@
     let loginBox = document.getElementById("login-box");
     let mainDoc = document.querySelectorAll("header, main, footer");
 
-    console.log("mainDoc", mainDoc)
-   
-
     adminLogin.addEventListener("click", (e) => {
-        console.log("click on login box");
-        loginBox.style.visibility = "visible";
+        loginBox.classList.add("fadeIn");
         for (let i = 0; i < mainDoc.length; i++) {
-            mainDoc[i][0].style.opacity = "0.3";
+            mainDoc[i].classList.add("dimScreen");
         }
+        loginBox.style.visibility = "visible";
     });
 
-    mainDoc.addEventListener("click", (e) => {
-        console.log("click outside of login box")
-        if ()
-    } )
+    mainDoc.forEach((item) => {
+        item.addEventListener("click", (e) => {
+            loginBox.style.visibility = "hidden";
+            loginBox.classList.remove("fadeIn");
+            for (let i = 0; i < mainDoc.length; i++) {
+                mainDoc[i].classList.remove("dimScreen");
+            }
+        });
+    });
 })();

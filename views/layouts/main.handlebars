@@ -3,7 +3,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="/style.css" />
+        <link rel="stylesheet" href="/scripts/style.css" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
             href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap"
@@ -24,28 +24,28 @@
                 <div class="dropdown-menu closed">
                     <div id="portfolio-label" class="menu-item">PORTFOLIO</div>
                     <ul class="menu">
-                        <li><a href="#">LINK ONE</a></li>
-                        <li><a href="#">LINK TWO</a></li>
-                        <li><a href="#">LINK THREE</a></li>
-                        <li><a href="#">ABCDEFGHIJKLM</a></li>
-                        <li><a href="#">LINK ONE</a></li>
-                        <li><a href="#">LINK TWO</a></li>
-                        <li><a href="#">LINK THREE</a></li>
-                        <li><a href="#">ABCDEFGHIJKLM</a></li>
+                        <li
+                            v-for="image in sortedCategories"
+                            v-bind:key="image.id"
+                        >
+                            <a
+                                v-bind:href="`/category/${image.category}`"
+                            >\{{image.category}}</a></li>
+
                     </ul>
                 </div>
 
                 <div id="about-label">
-                    <a href="about">ABOUT</a>
+                    <a href="/about">ABOUT</a>
                 </div>
                 <div id="contact-label">
-                    <a href="contact">CONTACT</a>
+                    <a href="/contact">CONTACT</a>
                 </div>
                 <div><a
                         href="http://www.instagram.com/spreadloveandterror"
                         target="_blank"
                     >
-                        <img src="instaicon.png" /></a>
+                        <img src="/instaicon.png" /></a>
                 </div>
             </div>
         </header>
@@ -62,18 +62,22 @@
             <form
                 id="login-form"
                 method="POST"
-                action="send"
-                enctype="multipart/form-data"
+                {{! enctype="multipart/form-data" }}
             >
                 <label>Username</label>
                 <input type="text" name="username" required />
                 <label>Password</label>
                 <input type="password" name="password" required />
+                <input type="hidden" name="_csrf" value="{{csrfToken}}" />
                 <button type="submit">Submit</button>
             </form>
         </div>
 
-        <script src="/site.js"></script>
+        <script src="/scripts/vue.js"></script>
+        <script src="/scripts/axios.min.js"></script>
+        <script src="/scripts/vuescript.js"></script>
+        <script src="/scripts/site.js"></script>
+
     </body>
 
 </html>

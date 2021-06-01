@@ -15,10 +15,6 @@ header {
     margin-right: 60px;
 }
 
-main {
-    opacity: 1;
-}
-
 #logo img {
     height: 120px;
 }
@@ -85,12 +81,23 @@ main {
     width: 50%;
 }
 
-#text-container {
+#text-container,
+#image-container {
     width: 100vw;
     font-size: 16px;
     font-family: Yantramanav;
     display: flex;
     justify-content: center;
+}
+
+#image-container {
+    display: grid;
+    grid-template-columns: 3;
+    gap: 30px;
+}
+
+.image-card img {
+    width: 200px;
 }
 
 #bio {
@@ -141,7 +148,6 @@ footer {
 
 #admin-login {
     position: absolute;
-    border: 1px white solid;
     bottom: 10px;
     width: 30px;
     height: 30px;
@@ -165,6 +171,14 @@ footer {
     border-radius: 4%;
 }
 
+.fadeIn {
+    opacity: 1;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-duration: 1s;
+}
+
 @keyframes fadeInOpacity {
     0% {
         opacity: 0;
@@ -174,43 +188,19 @@ footer {
     }
 }
 
-.fadeOut {
-    opacity: 0;
-    animation-name: fadeOutOpacity;
+.dimScreen {
+    opacity: 0.3;
+    animation-name: dimScreenOpacity;
     animation-iteration-count: 1;
-    animation-timing-function: ease-in;
-    animation-duration: 0.5s;
-}
-
-@keyframes fadeOutOpacity {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-
-.fadeOut2 {
-    opacity: 1;
-    background: black;
-    animation-name: fadeOutOpacity2;
-    animation-iteration-count: 1;
-    animation-timing-function: ease-in-out;
+    animation-timing-function: ease;
     animation-duration: 1s;
 }
 
-@keyframes fadeOutOpacity2 {
+@keyframes dimScreenOpacity {
     0% {
         opacity: 1;
-        background: black;
-    }
-    50% {
-        opacity: 0;
-        background: rgb(255, 202, 239);
     }
     100% {
-        opacity: 1;
-        background: black;
+        opacity: 0.3;
     }
 }
