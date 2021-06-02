@@ -30,7 +30,6 @@
     });
 
     dropdownMenu.addEventListener("mouseout", (e) => {
-        console.log("click on menu");
         if (dropdownMenu.classList.contains("closed")) {
             dropdownMenu.classList.remove("closed");
         } else {

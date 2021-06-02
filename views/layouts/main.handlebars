@@ -2,6 +2,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="csrf-token" content="{{csrfToken}}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/scripts/style.css" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -14,63 +15,87 @@
             rel="stylesheet"
         />
         <title>Thomas Heaphy</title>
+
     </head>
+
     <body>
-        <header>
-            <div id="logo">
-                <img src="/logo.jpg" />
-            </div>
-            <div id="top-menu">
-                <div class="dropdown-menu closed">
-                    <div id="portfolio-label" class="menu-item">PORTFOLIO</div>
-                    <ul class="menu">
-                        <li
-                            v-for="image in sortedCategories"
-                            v-bind:key="image.id"
+
+        <div id="main">
+
+            <header>
+                <div id="logo">
+                    <img src="/logo.jpg" />
+                </div>
+                <div id="top-menu">
+                    <div class="dropdown-menu closed">
+                        <div
+                            id="portfolio-label"
+                            class="menu-item"
+                        >PORTFOLIO</div>
+                        <ul class="menu">
+
+                            <li
+                                v-for="image in sortedCategories"
+                                v-bind:key="image.id"
+                                @click="setSelectedCategory(image.category)"
+                            >
+                                \{{image.category}}</li>
+
+                        </ul>
+                    </div>
+
+                    <div id="about-label">
+                        <a href="/about">ABOUT</a>
+                    </div>
+                    <div id="contact-label">
+                        <a href="/contact">CONTACT</a>
+                    </div>
+                    <div><a
+                            href="http://www.instagram.com/spreadloveandterror"
+                            target="_blank"
                         >
-                            <a
-                                v-bind:href="`/category/${image.category}`"
-                            >\{{image.category}}</a></li>
-
-                    </ul>
+                            <img src="/instaicon.png" /></a>
+                    </div>
                 </div>
-
-                <div id="about-label">
-                    <a href="/about">ABOUT</a>
-                </div>
-                <div id="contact-label">
-                    <a href="/contact">CONTACT</a>
-                </div>
-                <div><a
-                        href="http://www.instagram.com/spreadloveandterror"
-                        target="_blank"
+            </header>
+            <div v-if="categories.length == 0">
+                {{{body}}}
+            </div>
+            <div v-else-if="categories.length > 0">
+                <div id="image-container">
+                    <div
+                        class="image-thumbnail"
+                        v-for="image in categories"
+                        v-bind:key="image.id"
                     >
-                        <img src="/instaicon.png" /></a>
+                        <a v-bind:href="`/images/#${image.id}`">
+                            <img
+                                :src="`${image.path}`"
+                                :alt="`${image.title}`"
+                            />
+                        </a>
+                    </div>
                 </div>
             </div>
-        </header>
 
-        {{{body}}}
+            <footer>
 
-        <footer>
+                © THOMAS HEAPHY 2021
+            </footer>
 
-            © THOMAS HEAPHY 2021
-        </footer>
+            <div id="admin-login"></div>
+            <div id="login-box">
+                <form id="login-form" method="POST">
+                    <label>Username</label>
+                    <input type="text" name="username" required />
+                    <label>Password</label>
+                    <input type="password" name="password" required />
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}" />
 
-        <div id="admin-login"></div>
-        <div id="login-box">
-            <form
-                id="login-form"
-                method="POST"
-                {{! enctype="multipart/form-data" }}
-            >
-                <label>Username</label>
-                <input type="text" name="username" required />
-                <label>Password</label>
-                <input type="password" name="password" required />
-                <input type="hidden" name="_csrf" value="{{csrfToken}}" />
-                <button type="submit">Submit</button>
-            </form>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+
         </div>
 
         <script src="/scripts/vue.js"></script>

@@ -35,13 +35,12 @@ app.use(
 
 app.use(csurf());
 
+
 app.use(function (req, res, next) {
     res.setHeader("x-frame-options", "deny");
     res.locals.csrfToken = req.csrfToken();
     next();
 });
-
-app.use(express.static("public"));
 
 let upload = multer({
     storage: multer.diskStorage({
@@ -66,6 +65,8 @@ let upload = multer({
 //     pass: process.env.PASS,
 //   },
 // });
+
+app.use(express.static("public"));
 
 app.use(express.json());
 
@@ -139,25 +140,16 @@ app.get("/category/:category", (req, res) => {
     console.log("req.params: ", req.params);
     db.selectCategory(req.params.category)
         .then((result) => {
-            console.log(":category Result: ", result.rows[0]);
-            res.render("portfolio");
-            // res.json(result.rows);
+            console.log(":category Result: ", result.rows);
+            res.json(result.rows);
         })
         .catch((err) => {
             console.log("Error in getting categories: ", err);
         });
 });
 
-app.get("/images", (req, res) => {
-    console.log("Get images test");
-    db.getImages()
-        .then((result) => {
-            console.log("images Result: ", result.rows);
-            res.json(result.rows);
-        })
-        .catch((err) => {
-            console.log("Error in getting images: ", err);
-        });
+app.get("/categories/:category", (req, res) => {
+    res.render("portfolio");
 });
 
 app.get("/images/:imageId", (req, res) => {
@@ -172,8 +164,19 @@ app.get("/images/:imageId", (req, res) => {
         });
 });
 
+app.get("/images", (req, res) => {
+    db.getImages()
+        .then((result) => {
+            // console.log("images Result: ", result.rows);
+            res.json(result.rows);
+        })
+        .catch((err) => {
+            console.log("Error in getting images: ", err);
+        });
+});
+
 app.post("/upload", upload.single("file"), (req, res) => {
-    console.log("Upload successful");
+    console.log("Uploading..");
     console.log("req.body: ", req.body);
     console.log("req.file: ", req.file);
     if (req.file) {
@@ -184,7 +187,10 @@ app.post("/upload", upload.single("file"), (req, res) => {
                 res.json(result.rows[0]);
                 res.redirect("/");
             })
-            .catch((err) => console.log("Error in uploading", err));
+            .catch(
+                (err) => console.log("Error in uploading", err),
+                res.redirect("/")
+            );
     } else {
         res.json({
             success: false,

@@ -28,6 +28,7 @@ header {
     font-family: "Work Sans";
     font-size: 15px;
     letter-spacing: 4px;
+    text-transform: uppercase;
 }
 
 #top-menu a {
@@ -92,11 +93,11 @@ header {
 
 #image-container {
     display: grid;
-    grid-template-columns: 3;
+    grid-template-columns: auto auto auto;
     gap: 30px;
 }
 
-.image-card img {
+.image-thumbnail img {
     width: 200px;
 }
 

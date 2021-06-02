@@ -7,7 +7,6 @@ Vue.component("view-image", {
             description: "",
             category: "",
             path: "",
-            created_at: "",
         };
     },
     
@@ -34,76 +33,38 @@ Vue.component("view-image", {
                     (this.path = res.data.path)                  
                 })
                 .catch((err) => {
-                    console.log("Error in getting image: ", err);
+                    console.log,("Error in getting image: ", err);
                 });
         },
     },
 });
-
-Vue.component("display-images", {
-    template: "#display-images",
-    props: ["category"],
-    data: function () {
-        return {
-            title: "",
-            description: "",
-            category: "",
-            path: "",
-            created_at: "",
-        };
-    },
-    
-    mounted: function () {
-        this.specifyImages();
-    },
-    watch: {
-        category: function () {
-            this.specifyImages();
-        },
-    },
-    methods: {
-        specifyImages: function () {
-            console.log("this.category: ", this.category);
-            axios
-                .get(`/${this.category}`)
-                .then((res) => {
-                    (this.category = res.data.category),
-                    (this.title = res.data.title),
-                    (this.description = res.data.description),
-                    (this.path = res.data.path)                        
-                })
-                .catch((err) => {
-                    console.log("Error in getting category: ", err);
-                });
-        },
-    },
-});
-
-
-
-
 
 new Vue({
-    el: "main", // ELement it's in charge of
+    el: "#main", // ELement it's in charge of
     data: {
         // Keeps track of variables, changes
         images: [],
+        categories: [],
         title: "",
         description: "",
         category: "",
         path: "",
-        created_at: "",
         file: null,
         imageId: null,
         renderComponent: false,
+        csrf: document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"),
     },
     mounted: function () {
         var self = this; 
         axios.get("/images").then(function (res) {
             self.images = res.data;
-            console.log("images data: ", self.images)
+            console.log("images data: ", self.images);
             
-        });
+            
+        });   
+
         if (location.hash) {
             self.toggleImage(location.hash.slice(1));
         }
@@ -111,8 +72,37 @@ new Vue({
             console.log("location.hash: ", location.hash);
             self.toggleImage(location.hash.slice(1));
         });
+
+
     },
+
+    computed: {
+    sortedCategories: function () {
+      var categories = {};
+      return this.images.filter(function (images) {
+        if (categories[images.category]) return false;
+        return categories[images.category] = true;
+      })
+    }
+    },
+
     methods: {
+
+        setSelectedCategory: function(category) {
+            console.log("category: ", category)
+            axios
+                .get(`/category/${category}`)
+                .then((res) => {
+                    this.categories = res.data;  
+                    console.log("this.categories: ", this.categories)
+                .catch((err) => {
+                    console.log("Error in getting category: ", err);
+                })
+                })           
+                
+        },
+        
+
         handleChange: function (e) {
             console.log("e.target.files[0]: ", e.target.files[0]);
             console.log("this: ", this);
@@ -128,6 +118,8 @@ new Vue({
             formData.append("title", this.title);
             formData.append("description", this.description);
             formData.append("category", this.category);
+            formData.append('_csrf', this.csrf)
+            console.log("this.csrf", this.csrf);
             console.log("formData: ", formData);
 
             axios
@@ -152,39 +144,16 @@ new Vue({
             this.imageId = null;
             location.hash = "";
             history.pushState({}, "", "/");
-        }
-    },
-});
-
-new Vue({
-    el: "header", 
-    data: {
-        images: [],
-        title: "",
-        description: "",
-        category: "",
-        path: "",
-        created_at: "",
-        file: null,
-        imageId: null,
-        renderComponent: false,
-    },
-    mounted: function () {
-        var self = this; 
-        axios.get("/images").then(function (res) {
-            self.images = res.data;
-            console.log("images data: ", self.images)
-                
-    })
-    },
-    computed: {
-    sortedCategories: function () {
-      var categories = {};
-      return this.images.filter(function (images) {
-        if (categories[images.category]) return false;
-        return categories[images.category] = true;
-      })
+        },
+        getCategories: function () {
+            console.log("getting category: ", category);
+            axios.get(`/categories/${category}`).then(function (res) {
+            this.categories = res.data;
+            console.log(" category: ", this.categories);
+            res.render("portfolio")
+            })           
+        },
     }
-}
     
 });
+

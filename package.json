@@ -24,7 +24,8 @@
     "nodemailer": "^6.6.1",
     "path": "^0.12.7",
     "spiced-pg": "^1.0.4",
-    "uid-safe": "^2.1.5"
+    "uid-safe": "^2.1.5",
+    "vue-laravel-csrf": "^1.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",

@@ -1,7 +1,7 @@
 <main>
 
     <div id="text-container">
-        <form method="post" action="/upload">
+        <form method="post" action="/upload" v-csrf-token>  
             <input
                 v-model="title"
                 type="text"
@@ -26,7 +26,9 @@
                 name="file"
                 accept="image/*"
             />
-            <button @click.prevent="submitFile" type="submit">Submit</button>
+            <input  type="hidden" name="test" :value="csrf">
+            <h1>{{csrfToken}}</h1>
+            <button @click.prevent="submitFile" type="submit" >Submit</button>
         </form>
     </div>
 
