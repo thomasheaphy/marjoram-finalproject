@@ -102,12 +102,13 @@ new Vue({
             axios
                 .get(`/category/${category}`)
                 .then((res) => {
-                    this.categories = res.data;  
+                    this.categories = res.data;
                     console.log("this.categories: ", this.categories)
+                })
                 .catch((err) => {
                     console.log("Error in getting category: ", err);
                 })
-                })           
+                           
                 
         },
         
