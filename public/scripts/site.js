@@ -41,7 +41,9 @@
 
     let adminLogin = document.getElementById("admin-login");
     let loginBox = document.getElementById("login-box");
-    let mainDoc = document.querySelectorAll("header, main, footer");
+    let mainDoc = document.querySelectorAll(
+        "header, main, footer, #image-container"
+    );
 
     adminLogin.addEventListener("click", (e) => {
         loginBox.classList.add("fadeIn");

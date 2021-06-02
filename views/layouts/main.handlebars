@@ -58,25 +58,70 @@
                     </div>
                 </div>
             </header>
-            <div v-if="categories.length == 0">
-                {{{body}}}
-            </div>
-            <div v-else-if="categories.length > 0">
-                <div id="image-container">
-                    <div
-                        class="image-thumbnail"
-                        v-for="image in categories"
-                        v-bind:key="image.id"
-                    >
-                        <a v-bind:href="`/images/#${image.id}`">
+            <main>
+                <div v-if="categories.length == 0">
+                    {{{body}}}
+                </div>
+
+                <div v-else-if="categories.length > 0">
+
+
+
+                    <div id="image-container">
+                        <div
+                            class="image-thumbnail"
+                            v-for="image in categories"
+                            v-bind:key="image.id"
+                        >
+                            <a :href="`#${image.id}`" >
                             <img
                                 :src="`${image.path}`"
                                 :alt="`${image.title}`"
                             />
-                        </a>
+                            </a>
+
+                        </div>
                     </div>
+                       
+                    </div>
+
+                        <view-image :image-id="imageId" v-if="imageId" @close="closeWindow" >
+                        </view-image>
+   
+                    <script id="view-image" type="text/x-template">
+                    
+                    <div id="card-container">
+                        <div id="card-view">
+                         
+                            <span id="close-button" @click="closeWindow">X</span>
+                            <div id="card-image">
+                                <img :src="path" :alt="title" > 
+                            </div>
+
+                            <div id="card-description">
+                                <p id="card-title" class="text-span">\{{title}} \{{imageId}}</p>
+                                <p class="text-span">\{{description}}</p>
+                            </div>
+
+      
+                        </div>
+                    </div>
+                    </script>
+
+
+
+
+
+
+
                 </div>
-            </div>
+
+
+
+
+
+
+            </main>
 
             <footer>
 

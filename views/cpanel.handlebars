@@ -1,35 +1,25 @@
-<main>
+<div id="text-container">
+    <form method="post" action="/upload" v-csrf-token>
+        <input v-model="title" type="text" name="title" placeholder="title" />
+        <input
+            v-model="description"
+            type="text"
+            name="description"
+            placeholder="description"
+        />
+        <input
+            v-model="category"
+            type="text"
+            name="category"
+            placeholder="category"
+        />
+        <input
+            @change="handleChange"
+            type="file"
+            name="file"
+            accept="image/*"
+        />
 
-    <div id="text-container">
-        <form method="post" action="/upload" v-csrf-token>  
-            <input
-                v-model="title"
-                type="text"
-                name="title"
-                placeholder="title"
-            />
-            <input
-                v-model="description"
-                type="text"
-                name="description"
-                placeholder="description"
-            />
-            <input
-                v-model="category"
-                type="text"
-                name="category"
-                placeholder="category"
-            />
-            <input
-                @change="handleChange"
-                type="file"
-                name="file"
-                accept="image/*"
-            />
-            <input  type="hidden" name="test" :value="csrf">
-            <h1>{{csrfToken}}</h1>
-            <button @click.prevent="submitFile" type="submit" >Submit</button>
-        </form>
-    </div>
-
-</main>
+        <button @click.prevent="submitFile" type="submit">Submit</button>
+    </form>
+</div>

@@ -1,26 +1,23 @@
-<main>
-    <div id="image-container">
-        <div
-            class="image-thumbnail"
-            v-for="image in images"
-            v-bind:key="image.id"
-        >
-            <a v-bind:href="`/images/#${image.id}`">
-                <img :src="`${image.path}`" :alt="`${image.title}`" />
-            </a>
-        </div>
+<div id="image-container">
+    <div
+        class="image-thumbnail"
+        v-for="image in categories"
+        v-bind:key="image.id"
+    >
+        <a v-bind:href="`/images/#${image.id}`">
+            <img :src="`${image.path}`" :alt="`${image.title}`" />
+        </a>
     </div>
+</div>
 
-    <view-image :image-id="imageId" v-if="imageId" @close="closeWindow">
-    </view-image>
+<view-image :image-id="imageId" v-if="imageId" @close="closeWindow">
+</view-image>
 
-    <script id="view-image" type="text/x-template">
-        <div id="card-view"> <div id="card-top"> <span id="close-button"
-        @click="closeWindow">X</span> </div> <div id="card"> <div
-        id="card-main"> <div id="card-image"> <img :src="`${path}`"
-        :alt="`${title}`"> </div> <div id="card-description"> <p
-        class="text-span" v-if="title">\{{title}}</p> <p class="text-span"
-        v-if="description">\{{description}}</p> </div> </div> </div> </div>
-    </script>
-
-</main>
+<script id="view-image" type="text/x-template">
+    <div id="card-view"> <div id="card-top"> <span id="close-button"
+    @click="closeWindow">X</span> </div> <div id="card"> <div id="card-main">
+    <div id="card-image"> <img :src="`${path}`" :alt="`${title}`"> </div> <div
+    id="card-description"> <p class="text-span" v-if="title">\{{title}}</p> <p
+    class="text-span" v-if="description">\{{description}}</p> </div> </div>
+    </div> </div>
+</script>

@@ -37,9 +37,11 @@ header {
 }
 
 #top-menu a:hover,
-.menu-item:hover {
+.menu-item:hover,
+.menu li:hover {
     color: grey;
     transition: color 0.5s;
+    cursor: pointer;
 }
 
 .menu-item {
@@ -204,4 +206,43 @@ footer {
     100% {
         opacity: 0.3;
     }
+}
+
+.image-thumbnail img:hover {
+    opacity: 0.7;
+    transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -webkit-transition: opacity 0.5s ease-in-out;
+}
+
+#card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#card-view {
+    position: absolute;
+    top: 8vh;
+}
+
+#card-image img {
+    height: 80vh;
+}
+
+#close-button {
+    text-align: right;
+    position: absolute;
+    right: 1%;
+    color: black;
+    background-color: gray;
+    opacity: 0.3;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#close-button:hover {
+    opacity: 1;
+    transition: opacity 0.5s;
+    cursor: pointer;
 }

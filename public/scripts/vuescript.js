@@ -12,6 +12,7 @@ Vue.component("view-image", {
     
     mounted: function () {
         this.selectImage();
+        
     },
     watch: {
         imageId: function () {
@@ -27,17 +28,23 @@ Vue.component("view-image", {
             axios
                 .get(`/images/${this.imageId}`)
                 .then((res) => {
-                    (this.title = res.data.title),
-                    (this.description = res.data.description),
-                    (this.category = res.data.category),
-                    (this.path = res.data.path)                  
+                    console.log("res.data: ", res.data);
+                    this.title = res.data.title;
+                    this.description = res.data.description;
+                    this.category = res.data.category;
+                    this.path = res.data.path;
+                    console.log("this: ", this)
+                    console.log("this.title: ", this.title)             
                 })
                 .catch((err) => {
-                    console.log,("Error in getting image: ", err);
+                    console.log("Error in getting image: ", err);
                 });
         },
     },
 });
+
+
+
 
 new Vue({
     el: "#main", // ELement it's in charge of
@@ -73,7 +80,9 @@ new Vue({
             self.toggleImage(location.hash.slice(1));
         });
 
+        
 
+        
     },
 
     computed: {
@@ -118,7 +127,7 @@ new Vue({
             formData.append("title", this.title);
             formData.append("description", this.description);
             formData.append("category", this.category);
-            formData.append('_csrf', this.csrf)
+            formData.append('_csrf', this.csrf);
             console.log("this.csrf", this.csrf);
             console.log("formData: ", formData);
 
@@ -145,14 +154,7 @@ new Vue({
             location.hash = "";
             history.pushState({}, "", "/");
         },
-        getCategories: function () {
-            console.log("getting category: ", category);
-            axios.get(`/categories/${category}`).then(function (res) {
-            this.categories = res.data;
-            console.log(" category: ", this.categories);
-            res.render("portfolio")
-            })           
-        },
+        
     }
     
 });
