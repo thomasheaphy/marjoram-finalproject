@@ -43,7 +43,51 @@ Vue.component("view-image", {
     },
 });
 
+Vue.component("image-list", {
+    template: "#image-list",
+    props: [],
+    data: function () {
+        return {
+            images: [],
+            title: "",
+            description: "",
+            category: "",
+            path: "",
+        };
+    },
+    
+    mounted: function () {
+        var self = this; 
+        axios.get("/images").then(function (res) {
+            self.images = res.data;
+            console.log("images data: ", self.images);
+            
+            
+        });   
+    },
+    
+    watch: {
+        images: function () {
+            console.log("Images list changed")
+        },
+    },
 
+    methods: {
+        
+            deleteImage: function(imageId) {
+            console.log("imageId: ", imageId)
+            axios
+                .get(`/images/delete/${imageId}`)
+                .then((res) => {
+                    return this.images = this.images.filter(res.data);
+                   
+                })
+                .catch((err) => {
+                    console.log("Error in delete image: ", err);
+                })
+        }
+    },
+});
 
 
 new Vue({
@@ -88,6 +132,8 @@ new Vue({
     computed: {
     sortedCategories: function () {
       var categories = {};
+      console.log("this:", this);
+      console.log("this.images, ", this.images);
       return this.images.filter(function (images) {
         if (categories[images.category]) return false;
         return categories[images.category] = true;
@@ -110,6 +156,25 @@ new Vue({
                 })
                            
                 
+        },
+
+        closeWindow: function () {
+            this.$emit("close");
+        },
+
+        deleteImage: function(imageId) {
+            console.log("imageId: ", imageId)
+            axios
+                .get(`/images/delete/${imageId}`)
+                .then((res) => {
+                    console.log("res.data: ", res.data);
+                    console.log("this.images: ", this.images);
+                    this.images.shift();
+                    console.log("this.images: ", this.images);
+                })
+                .catch((err) => {
+                    console.log("Error in delete image: ", err);
+                })
         },
         
 
@@ -136,6 +201,8 @@ new Vue({
                 .post("/upload", formData)
                 .then((res) => {
                     console.log("Uploading image");
+                    console.log("res.data: ", res.data);
+                    console.log("this.images: ", this.images);
                     this.images.unshift(res.data);
                     this.title = "";
                     this.description = "";

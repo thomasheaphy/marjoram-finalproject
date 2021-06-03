@@ -26,10 +26,10 @@ module.exports.getImages = () => {
     );
 };
 
-module.exports.addImages = (title, description, category, path) => {
+module.exports.addImages = (title, description, path, category) => {
     return db.query(
         `
-    INSERT INTO images (title, description, category, path)
+    INSERT INTO images (title, description, path, category)
     VALUES ($1, $2, $3, $4)
     RETURNING *
     `,
@@ -42,6 +42,17 @@ module.exports.selectImage = (imageId) => {
         `
     SELECT * FROM images
     WHERE id = $1
+    `,
+        [imageId]
+    );
+};
+
+module.exports.deleteImage = (imageId) => {
+    return db.query(
+        `
+    DELETE FROM images
+    WHERE id = $1
+    RETURNING *
     `,
         [imageId]
     );

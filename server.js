@@ -11,14 +11,15 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 const cookieSession = require("cookie-session");
 const { COOKIE_SECRET } = require("./secrets.json");
-const csurf = require("csurf");
-const { hash, compare } = require("./bc.js");
+// const csurf = require("csurf");
+const { compare } = require("./bc.js");
 const fs = require("fs");
 
 app.engine("handlebars", hb());
 app.set("view engine", "handlebars");
 
 // MIDDLEWARE
+// var csrfExclusion = ["/upload"];
 
 app.use(
     cookieSession({
@@ -33,20 +34,28 @@ app.use(
     })
 );
 
-app.use(csurf());
+// app.use(function (req, res, next) {
+//     if (csrfExclusion.indexOf(req.path) !== -1) {
+//         next();
+//     } else {
+//         csrf()(req, res, next);
+//     }
+// });
 
+// app.use(function (req, res, next) {
+//     res.setHeader("x-frame-options", "deny");
+//     res.locals.csrfToken = req.csrfToken();
+//     next();
+// });
 
-app.use(function (req, res, next) {
-    res.setHeader("x-frame-options", "deny");
-    res.locals.csrfToken = req.csrfToken();
-    next();
-});
+app.use(express.static("public"));
+
+app.use(express.json());
 
 let upload = multer({
     storage: multer.diskStorage({
         destination: (req, file, callback) => {
-            let path = `./images`;
-            fs.mkdirsSync(path);
+            let path = `./public/images/`;
             callback(null, path);
         },
         filename: (req, file, callback) => {
@@ -65,10 +74,6 @@ let upload = multer({
 //     pass: process.env.PASS,
 //   },
 // });
-
-app.use(express.static("public"));
-
-app.use(express.json());
 
 // MAIN PAGE
 
@@ -96,7 +101,10 @@ app.post("/", (req, res) => {
                             );
                             res.render("cpanel");
                         } else {
-                            res.render("/");
+                            res.render("index", {
+                                loginError:
+                                    "Username or password error. Please try again",
+                            });
                         }
                     }
                 );
@@ -104,7 +112,9 @@ app.post("/", (req, res) => {
         })
         .catch((err) => {
             console.log("Login error: ", err);
-            res.render("/");
+            res.render("index", {
+                loginError: "Username or password error. Please try again",
+            });
         });
 });
 
@@ -164,6 +174,18 @@ app.get("/images/:imageId", (req, res) => {
         });
 });
 
+app.get("/images/delete/:imageId", (req, res) => {
+    console.log(":imageId - req.params: ", req.params);
+    db.deleteImage(req.params.imageId)
+        .then((result) => {
+            console.log("imageId result: ", result.rows[0]);
+            res.json(result.rows[0]);
+        })
+        .catch((err) => {
+            console.log("Error in getting imageId: ", err);
+        });
+});
+
 app.get("/images", (req, res) => {
     db.getImages()
         .then((result) => {
@@ -181,21 +203,22 @@ app.post("/upload", upload.single("file"), (req, res) => {
     console.log("req.file: ", req.file);
     if (req.file) {
         const { title, description, category } = req.body;
-        const path = req.file.path;
-        db.addImages(title, description, category, path)
+        const path = `/images/${req.file.filename}`;
+        console.log("req.file: ", req.file.filename);
+        db.addImages(title, description, path, category)
             .then((result) => {
                 res.json(result.rows[0]);
-                res.redirect("/");
             })
-            .catch(
-                (err) => console.log("Error in uploading", err),
-                res.redirect("/")
-            );
+            .catch((err) => {
+                console.log("Error in uploading", err);
+                res.json({
+                    success: false,
+                });
+            });
     } else {
         res.json({
             success: false,
         });
-        res.redirect("/");
     }
 });
 

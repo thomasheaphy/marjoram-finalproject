@@ -22,10 +22,13 @@
 
         <div id="main">
 
-            <header>
+            <header @click="closeWindow">
                 <div id="logo">
-                    <img src="/logo.jpg" />
+                    <a href="/"><img src="/logo.jpg" /></a>
                 </div>
+                {{#if loginError}}
+                    <div id="login-error">{{loginError}}</div>
+                {{/if}}
                 <div id="top-menu">
                     <div class="dropdown-menu closed">
                         <div
@@ -64,41 +67,38 @@
                     {{{body}}}
                 </div>
 
-                <div v-else-if="categories.length > 0">
+                <div
+                    v-else-if="categories.length > 0"
+                    id="image-container"
+                    @click="closeWindow"
+                >
 
-                    <div id="image-container">
-                        <div
-                            class="image-thumbnail"
-                            v-for="image in categories"
-                            v-bind:key="image.id"
-                        >
-                            <a :href="`#${image.id}`">
-                                <img
-                                    :src="`${image.path}`"
-                                    :alt="`${image.title}`"
-                                />
-                            </a>
-
-                        </div>
-                    </div>
-
-                    <view-image
-                        :image-id="imageId"
-                        v-if="imageId"
-                        @close="closeWindow"
+                    <div
+                        class="image-thumbnail"
+                        v-for="image in categories"
+                        v-bind:key="image.id"
                     >
-                    </view-image>
+                        <a :href="`#${image.id}`">
+                            <img
+                                :src="`${image.path}`"
+                                :alt="`${image.title}`"
+                            />
+                        </a>
+
+                    </div>
 
                 </div>
 
-                <script id="view-image" type="text/x-template">
-                    <div><h1>\{{title}}</h1> <h1>Hello World</h1></div>
-
-                </script>
+                <view-image
+                    :image-id="imageId"
+                    v-if="imageId"
+                    @close="closeWindow"
+                >
+                </view-image>
 
             </main>
 
-            <footer>
+            <footer @click="closeWindow">
 
                 © THOMAS HEAPHY 2021
             </footer>
@@ -117,6 +117,22 @@
             </div>
 
         </div>
+
+        <script id="view-image" type="text/x-template">
+            <transition name="fade"> <div id="card-container"
+            @click="closeWindow"> <div id="card-view"> <div id="card-image">
+            <img :src="path" :alt="title" > </div> <div id="card-description">
+            <p id="card-title" class="text-span"><em>\{{title}}</em> </p> <p
+            class="text-span">\{{description}}</p> </div> </div> </div> <div
+            </transition>
+        </script>
+
+        <script id="image-list" type="text/x-template">
+            }} <div id="images-to-delete" v-for="imageref in images"
+            v-bind:key="imageref.id"> <div>\{{imageref.category}}</div> <div>\{{imageref.title}}</div>
+            <div @click="deleteImage(imageref.id)"
+            class="delete-button">Delete</div> </div>
+        </script>
 
         <script src="/scripts/vue.js"></script>
         <script src="/scripts/axios.min.js"></script>

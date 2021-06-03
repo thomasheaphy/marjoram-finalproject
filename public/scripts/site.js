@@ -45,6 +45,9 @@
         "header, main, footer, #image-container"
     );
 
+    let imageModal = document.getElementsByClassName("image-thumbnail");
+    console.log(imageModal);
+
     adminLogin.addEventListener("click", (e) => {
         loginBox.classList.add("fadeIn");
         for (let i = 0; i < mainDoc.length; i++) {

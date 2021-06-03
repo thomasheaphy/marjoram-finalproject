@@ -1,25 +1,44 @@
-<div id="text-container">
-    <form method="post" action="/upload" v-csrf-token>
-        <input v-model="title" type="text" name="title" placeholder="title" />
-        <input
-            v-model="description"
-            type="text"
-            name="description"
-            placeholder="description"
-        />
-        <input
-            v-model="category"
-            type="text"
-            name="category"
-            placeholder="category"
-        />
-        <input
-            @change="handleChange"
-            type="file"
-            name="file"
-            accept="image/*"
-        />
+<div id="control-panel">
+    <div id="text-container">
+        <form>
+            <input
+                v-model="title"
+                type="text"
+                name="title"
+                placeholder="title"
+            />
+            <input
+                v-model="description"
+                type="text"
+                name="description"
+                placeholder="description"
+            />
+            <input
+                v-model="category"
+                type="text"
+                name="category"
+                placeholder="category"
+            />
+            <input
+                @change="handleChange"
+                type="file"
+                name="file"
+                accept="image/*"
+            />
 
-        <button @click.prevent="submitFile" type="submit">Submit</button>
-    </form>
+            <button @click.prevent="submitFile" type="submit">Submit</button>
+        </form>
+    </div>
+
+    {{! <image-list :image-id="imageId" :title="title">
+    </image-list>
+
+    <script id="image-list" type="text/x-template"> }}
+    <div id="images-to-delete" v-for="image in images" v-bind:key="image.id">
+        <div>\{{image.category}}</div>
+        <div>\{{image.title}}</div>
+        <div @click="deleteImage(image.id)" class="delete-button">Delete</div>
+    </div>
+    {{! </script> }}
+
 </div>

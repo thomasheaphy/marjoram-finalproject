@@ -77,6 +77,14 @@ header {
     padding-right: 25px;
 }
 
+#login-error {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: red;
+}
+
 .splash-image {
     display: block;
     margin-left: auto;
@@ -87,20 +95,82 @@ header {
 #text-container,
 #image-container {
     width: 100vw;
+    height: auto;
     font-size: 16px;
     font-family: Yantramanav;
     display: flex;
     justify-content: center;
 }
 
+#text-container form {
+    padding-bottom: 100px;
+    width: 20vw;
+    gap: 10px;
+}
+
+#control-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+#upload-form {
+}
+
+#images-to-delete {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-left: 40%;
+}
+
+.delete-button {
+    color: red;
+    cursor: pointer;
+    border: 1px red solid;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: "Work Sans";
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.delete-button:hover {
+    color: grey;
+    transition: color 0.5s;
+    cursor: pointer;
+}
+
 #image-container {
+    width: 100%;
     display: grid;
     grid-template-columns: auto auto auto;
-    gap: 30px;
+    grid-template-rows: auto;
+    gap: 10px 10px;
+}
+
+.image-thumbnail {
+    display: flex;
+    height: 300px;
+    width: 300px;
 }
 
 .image-thumbnail img {
-    width: 200px;
+    position: absolute;
+    clip: rect(55px, 245px, 245px, 55px);
+    height: 400px;
+}
+
+.image-thumbnail img:hover {
+    opacity: 0.7;
+    transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -webkit-transition: opacity 0.5s ease-in-out;
+}
+
+.image-thumbnail span {
+    text-align: center;
 }
 
 #bio {
@@ -171,7 +241,6 @@ footer {
     width: 300px;
     height: 150px;
     border: 2px white solid;
-    border-radius: 4%;
 }
 
 .fadeIn {
@@ -208,13 +277,6 @@ footer {
     }
 }
 
-.image-thumbnail img:hover {
-    opacity: 0.7;
-    transition: opacity 0.5s ease-in-out;
-    -moz-transition: opacity 0.5s ease-in-out;
-    -webkit-transition: opacity 0.5s ease-in-out;
-}
-
 #card-container {
     display: flex;
     flex-direction: column;
@@ -227,22 +289,26 @@ footer {
 }
 
 #card-image img {
-    height: 80vh;
+    height: 84vh;
 }
 
-#close-button {
-    text-align: right;
-    position: absolute;
-    right: 1%;
-    color: black;
-    background-color: gray;
-    opacity: 0.3;
-    font-size: 20px;
-    cursor: pointer;
+#card-description {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
 }
 
-#close-button:hover {
-    opacity: 1;
+.text-span {
+    font-size: 12px;
+    font-weight: 100;
+    margin: 0;
+    padding: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
     transition: opacity 0.5s;
-    cursor: pointer;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
 }
