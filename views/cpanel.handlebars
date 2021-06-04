@@ -29,16 +29,11 @@
             <button @click.prevent="submitFile" type="submit">Submit</button>
         </form>
     </div>
-
-    {{! <image-list :image-id="imageId" :title="title">
-    </image-list>
-
-    <script id="image-list" type="text/x-template"> }}
-    <div id="images-to-delete" v-for="image in images" v-bind:key="image.id">
+    <div id="images-list-container">
+        <div id="images-to-delete" v-for="image in images" v-bind:key="image.id">
         <div>\{{image.category}}</div>
         <div>\{{image.title}}</div>
         <div @click="deleteImage(image.id)" class="delete-button">Delete</div>
     </div>
-    {{! </script> }}
-
+    </div>
 </div>

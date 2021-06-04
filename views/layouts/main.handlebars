@@ -128,10 +128,11 @@
         </script>
 
         <script id="image-list" type="text/x-template">
-            }} <div id="images-to-delete" v-for="imageref in images"
-            v-bind:key="imageref.id"> <div>\{{imageref.category}}</div> <div>\{{imageref.title}}</div>
-            <div @click="deleteImage(imageref.id)"
-            class="delete-button">Delete</div> </div>
+            <div id="images-list-container"><div id="images-to-delete"
+            v-for="imageref in images" v-bind:key="imageref.id"> <div>\{{imageref.category}}</div>
+            <div><em>\{{imageref.title}}</em></div> <div
+            @click="deleteImage(imageref.id)" class="delete-button">Delete</div>
+            </div></div>
         </script>
 
         <script src="/scripts/vue.js"></script>

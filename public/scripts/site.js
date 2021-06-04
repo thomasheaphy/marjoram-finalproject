@@ -46,7 +46,6 @@
     );
 
     let imageModal = document.getElementsByClassName("image-thumbnail");
-    console.log(imageModal);
 
     adminLogin.addEventListener("click", (e) => {
         loginBox.classList.add("fadeIn");
