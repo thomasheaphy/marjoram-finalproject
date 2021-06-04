@@ -39,6 +39,8 @@
 
     // LOGIN BOX
 
+    
+
     let adminLogin = document.getElementById("admin-login");
     let loginBox = document.getElementById("login-box");
     let mainDoc = document.querySelectorAll(
@@ -65,3 +67,12 @@
         });
     });
 })();
+
+// FILE UPLOAD BUTTON
+
+const uploadButton = document.getElementById('file');
+const fileChosen = document.getElementById('file-chosen');
+
+uploadButton.addEventListener('change', function(){
+  fileChosen.textContent = this.files[0].name
+})

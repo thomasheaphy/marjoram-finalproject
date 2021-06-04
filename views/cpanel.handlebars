@@ -1,33 +1,41 @@
 <div id="control-panel">
-    <div id="text-container">
+    <div style="display: flex; width: 690px; gap: 90px; align-items: center" >
+        <div><img src="/columnleft.jpg" style="height: 200px"></div>
+        <div id="text-container">
         <form>
             <input
                 v-model="title"
                 type="text"
                 name="title"
-                placeholder="title"
+                placeholder="Title"
             />
             <input
                 v-model="description"
                 type="text"
                 name="description"
-                placeholder="description"
+                placeholder="Description"
             />
             <input
                 v-model="category"
                 type="text"
                 name="category"
-                placeholder="category"
+                placeholder="Category"
             />
             <input
                 @change="handleChange"
+                id="file"
                 type="file"
                 name="file"
                 accept="image/*"
+                hidden
             />
+            <label for="file">Choose file</label>
+            <span id="file-chosen">No file chosen</span>
 
             <button @click.prevent="submitFile" type="submit">Submit</button>
-        </form>
+            </form>
+            </div>
+            <div><img src="/columnright.jpg" style="height: 200px"></div>
     </div>
     <div id="images-list-container">
         <div id="images-to-delete" v-for="image in images" v-bind:key="image.id">

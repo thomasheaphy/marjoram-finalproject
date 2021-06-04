@@ -4,6 +4,7 @@ body {
     margin: 0;
     box-sizing: border-box;
     font-family: "Work Sans";
+    overflow-x:hidden
 }
 
 header {
@@ -14,6 +15,8 @@ header {
     margin-left: 60px;
     margin-right: 60px;
 }
+
+
 
 #logo img {
     height: 120px;
@@ -93,7 +96,8 @@ header {
 }
 
 #text-container,
-#image-container {
+#image-container,
+#contact-container {
     width: 100vw;
     height: auto;
     font-size: 16px;
@@ -113,9 +117,7 @@ header {
     border-right: none;
 }
 
-#text-container form button {
-    background-color: black;
-}
+
 
 #control-panel {
     display: flex;
@@ -138,13 +140,42 @@ header {
 
 #images-list-container {
     width: 100vw;
+    margin-bottom: 100px;
+}
+
+#text-container form label{
+    
+    color: darkgreen;
+    cursor: pointer;
+    border: 1px darkgreen solid;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: "Work Sans";
+    font-size: 12px;
+    text-transform: uppercase;
+    height: 9px;
+    width: 80px;
+    line-height: 0px;
+    margin-top: 10px;
+}
+
+#text-container form input {
+    font-family: "Work Sans";
+    margin-top: 6px;
+    
+}
+
+#text-container form button,
+#contact-container form button {
+    background-color: black;
+    color: darkgreen;
+    border: 1px darkgreen solid;
 }
 
 .delete-button,
+#contact-container form button,
 #text-container form button {
-    color: darkred;
     cursor: pointer;
-    border: 1px darkred solid;
     padding-left: 10px;
     padding-right: 10px;
     font-family: "Work Sans";
@@ -152,8 +183,35 @@ header {
     text-transform: uppercase;
 }
 
-.delete-button:hover,
-#text-container form button:hover {
+
+
+#text-container form label:hover,
+#text-container form button:hover,
+#contact-container form button:hover{
+    color: green;
+    border: 1px green solid;
+    transition: color, 0.5s;
+    transition: border, 0.5s;
+    cursor: pointer;
+}
+
+#file-chosen{
+  border-bottom: 1px white solid;
+  color: gray;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: "Work Sans";
+  margin-top: 6px;
+}
+
+.delete-button {
+    color: darkred;
+    border: 1px darkred solid;
+}
+
+
+.delete-button:hover
+ {
     color: red;
     border: 1px red solid;
     transition: color, 0.5s;
@@ -260,6 +318,9 @@ footer {
     width: 300px;
     height: 150px;
     border: 2px white solid;
+    font-size: 12px;
+    letter-spacing: 4px;
+    background-image: url("/loginbg.jpg");
 }
 
 .fadeIn {
